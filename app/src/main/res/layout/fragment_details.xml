@@ -136,6 +136,16 @@
                 app:layout_constraintTop_toBottomOf="@+id/description"
                 tools:text="@string/count_template" />
 
+            <ImageButton
+                android:id="@+id/add_to_cart"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:background="@drawable/icon_add_to_cart"
+                app:layout_constraintTop_toBottomOf="@id/count"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/guideline"
+                />
+
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline"
                 android:layout_width="wrap_content"

@@ -1,5 +1,4 @@
-package com.example.nikita_shupliakou_testandroid_vacc_2024.menu
-
+package com.example.nikita_shupliakou_testandroid_vacc_2024.cart
 
 import android.app.AlertDialog
 import android.os.Bundle
@@ -14,22 +13,21 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.nikita_shupliakou_testandroid_vacc_2024.R
-import com.example.nikita_shupliakou_testandroid_vacc_2024.databinding.FragmentMenuBinding
+import com.example.nikita_shupliakou_testandroid_vacc_2024.databinding.FragmentCartBinding
 import com.example.nikita_shupliakou_testandroid_vacc_2024.details.DetailsFragment
 import dagger.android.support.DaggerFragment
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 
-class MenuFragment : DaggerFragment() {
+class CartFragment : DaggerFragment() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
-    private lateinit var binding: FragmentMenuBinding
+    private lateinit var binding: FragmentCartBinding
 
-    private val viewModel: MenuViewModel by viewModels { viewModelFactory }
-
-    private val adapter = MenuAdapter(onItemClicked = { productListModel ->
+    private val viewModel: CartViewModel by viewModels { viewModelFactory }
+    private val adapter = CartAdapter(onItemClicked = { productListModel ->
         parentFragmentManager.beginTransaction()
             .replace(R.id.container, DetailsFragment().apply {
                 arguments = bundleOf("ID" to productListModel.id)
@@ -44,7 +42,8 @@ class MenuFragment : DaggerFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentMenuBinding.inflate(layoutInflater)
+        binding = FragmentCartBinding.inflate(layoutInflater)
+        viewModel
         return binding.root
     }
 
@@ -54,35 +53,22 @@ class MenuFragment : DaggerFragment() {
         val recyclerViewMain = binding.rvProducts
         recyclerViewMain.layoutManager = GridLayoutManager(context, 2)
         recyclerViewMain.adapter = adapter
-//        binding.cart.setOnClickListener {
-//            parentFragmentManager.beginTransaction()
-//                .replace(
-//                    R.id.container, CartFragment()
-//                )
-//                .addToBackStack(null)
-//                .commit()
-//        }
 
         lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.nowState.collect { nowState ->
-                    adapter.setProductList(nowState.productList)
+//                    adapter.setCartList(nowState.cartList)
                     binding.progress.visibility = if (nowState.isLoading) {
                         View.VISIBLE
                     } else {
                         View.INVISIBLE
-                    }
-                    binding.cart.visibility = if (nowState.isLoading) {
-                        View.INVISIBLE
-                    } else {
-                        View.VISIBLE
                     }
                 }
             }
         }
 //        view.findViewById<TextView>(R.id.testMenuTextView).text = viewModel.testString
         lifecycleScope.launch {
-            viewModel.errorFlow.collect {
+            viewModel.errorFlow.collect { exception ->
                 val builder: AlertDialog.Builder = AlertDialog.Builder(context)
                 builder
                     .setMessage(getString(R.string.request_failed_message))
@@ -93,5 +79,6 @@ class MenuFragment : DaggerFragment() {
             }
         }
     }
-}
 
+
+}

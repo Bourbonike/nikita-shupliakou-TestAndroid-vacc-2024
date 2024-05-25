@@ -87,6 +87,11 @@ class DetailsFragment : DaggerFragment() {
                     } else {
                         View.INVISIBLE
                     }
+                    binding.addToCart.visibility = if (productState.isLoading) {
+                        View.INVISIBLE
+                    } else {
+                        View.VISIBLE
+                    }
                 }
             }
         }

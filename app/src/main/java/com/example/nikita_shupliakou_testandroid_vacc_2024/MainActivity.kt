@@ -34,7 +34,7 @@ class MainActivity : DaggerAppCompatActivity() {
         windowInsetsController.hide(WindowInsetsCompat.Type.navigationBars())
         setContentView(R.layout.activity_main)
 //        findViewById<TextView>(R.id.testTextView).text = viewModel.testString
-
+viewModel
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
                 .replace(R.id.container, MenuFragment())
