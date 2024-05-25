@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="menu_back">#d1ded7</color>
+    <color name="products_back">#b6d6d3</color>
+    <color name="details_back">#86d6d3</color>
+    <color name="progress_back">#409ea6</color>
+</resources>

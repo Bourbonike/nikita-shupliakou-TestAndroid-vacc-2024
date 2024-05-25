@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">nikita-shupliakou-TestAndroid-vacc-2024</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="request_failed_message">Request failed</string>
+    <string name="request_failed_title">Oops</string>
+    <string name="ok">OK</string>
+
+    <string name="rate_template" >rate:\n </string>
+    <string name="count_template" >count:\n</string>
+</resources>
